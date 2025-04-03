@@ -1,0 +1,5133 @@
+{
+    "info": {
+      "name": "Iter Polaris - API Tests",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Auth",
+        "item": [
+          {
+            "name": "Register - Success",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"username\": \"newuser\",\n  \"email\": \"newuser@example.com\",\n  \"password\": \"test1234\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/register",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["register"]
+              }
+            }
+          },
+          {
+            "name": "Register - Error (duplicado)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"username\": \"iterion\",\n  \"email\": \"iterion@example.com\",\n  \"password\": \"123456\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/register",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["register"]
+              }
+            }
+          },
+          {
+            "name": "Login - Success",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"username\": \"iterion\",\n  \"password\": \"123456\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/login",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["login"]
+              }
+            }
+          },
+          {
+            "name": "Login - Error (credenciales incorrectas)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"username\": \"iterion\",\n  \"password\": \"wrongpassword\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/login",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["login"]
+              }
+            }
+          },
+          {
+            "name": "Refresh Token",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{refresh_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/refresh",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["refresh"]
+              }
+            }
+          },
+          {
+            "name": "Forgot Password - Success",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"email\": \"iterion@example.com\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/forgot-password",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["forgot-password"]
+              }
+            }
+          },
+          {
+            "name": "Forgot Password - Error (no data)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/forgot-password",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["forgot-password"]
+              }
+            }
+          },
+          {
+            "name": "Reset Password - Success",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"reset_token\": \"{{reset_token}}\",\n  \"new_password\": \"newpass123\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/reset-password",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["reset-password"]
+              }
+            }
+          },
+          {
+            "name": "Reset Password - Error (datos incompletos)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"new_password\": \"newpass123\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/reset-password",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["reset-password"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Users",
+        "item": [
+          {
+            "name": "Get My User Info",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/me",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["me"]
+              }
+            }
+          },
+          {
+            "name": "Update My User Info",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"username\": \"iterion_updated\",\n  \"email\": \"iterion_updated@example.com\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/me",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["me"]
+              }
+            }
+          },
+          {
+            "name": "Change My Password",
+            "request": {
+              "method": "PATCH",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"current_password\": \"123456\",\n  \"new_password\": \"newpass123\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/me/password",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["me", "password"]
+              }
+            }
+          },
+          {
+            "name": "Change My Password - Error (datos incompletos)",
+            "request": {
+              "method": "PATCH",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"current_password\": \"123456\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/me/password",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["me", "password"]
+              }
+            }
+          },
+          {
+            "name": "Get All Users (Admin)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Get User By ID (Admin)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/2",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["2"]
+              }
+            }
+          },
+          {
+            "name": "Update User By ID (Admin)",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"username\": \"rosidolff_updated\",\n  \"email\": \"rosidolff_updated@example.com\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/2",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["2"]
+              }
+            }
+          },
+          {
+            "name": "Delete User By ID (Admin)",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/2",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["2"]
+              }
+            }
+          }
+        ]
+      }
+      ,
+      {
+        "name": "Zones",
+        "item": [
+          {
+            "name": "Get All Zones - No Filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Get Zones - Filtro por nombre",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?name=Trabajo",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "name",
+                    "value": "Trabajo"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Zones - Filtro por energía y nivel",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?min_energy=30&max_energy=70&min_level=2&max_level=4",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "min_energy",
+                    "value": "30"
+                  },
+                  {
+                    "key": "max_energy",
+                    "value": "70"
+                  },
+                  {
+                    "key": "min_level",
+                    "value": "2"
+                  },
+                  {
+                    "key": "max_level",
+                    "value": "4"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Zones - Filtro combinado (nombre + xp)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?name=Salud&min_xp=100&max_xp=500",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "name",
+                    "value": "Salud"
+                  },
+                  {
+                    "key": "min_xp",
+                    "value": "100"
+                  },
+                  {
+                    "key": "max_xp",
+                    "value": "500"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Zone By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Get Zone By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["9999"]
+              }
+            }
+          },
+          {
+            "name": "Create Zone",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Zona Prueba\",\n  \"description\": \"Zona creada desde Postman\",\n  \"color\": \"#abcdef\",\n  \"image\": \"zona.png\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Update Zone",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Zona Actualizada\",\n  \"description\": \"Actualización de zona\",\n  \"color\": \"#123abc\",\n  \"image\": \"nueva.png\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Zone",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Get Zone Stats",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/stats",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "stats"]
+              }
+            }
+          },
+          {
+            "name": "Assign Zone to Project",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"type\": \"project\",\n  \"item_id\": 1\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/1/assign",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "assign"]
+              }
+            }
+          },
+          {
+            "name": "Assign Zone - Error (datos incompletos)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/1/assign",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "assign"]
+              }
+            }
+          }
+        ]
+      }
+      ,
+      {
+        "name": "Projects",
+        "item": [
+          {
+            "name": "Get All Projects - No filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Get Projects - Filtro por zone_id",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?zone_id=3",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "zone_id",
+                    "value": "3"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Projects - Filtro por status",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?status=ACTIVE",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "status",
+                    "value": "ACTIVE"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Projects - Filtro por prioridad",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?priority=HIGH",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "priority",
+                    "value": "HIGH"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Projects - Filtro por rango de fechas",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?start_date=2024-01-01&end_date=2024-12-31",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "start_date",
+                    "value": "2024-01-01"
+                  },
+                  {
+                    "key": "end_date",
+                    "value": "2024-12-31"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Projects - Filtro combinado",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?zone_id=3&status=ACTIVE&priority=HIGH",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "zone_id",
+                    "value": "3"
+                  },
+                  {
+                    "key": "status",
+                    "value": "ACTIVE"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "HIGH"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Project By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Get Project By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["9999"]
+              }
+            }
+          },
+          {
+            "name": "Create Project",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Proyecto Prueba\",\n  \"description\": \"Descripción de prueba\",\n  \"zone_id\": 3,\n  \"priority\": \"HIGH\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Update Project",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Proyecto Actualizado\",\n  \"description\": \"Descripción actualizada\",\n  \"zone_id\": 3,\n  \"priority\": \"MEDIUM\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Project",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Get Project Progress",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/progress",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "progress"]
+              }
+            }
+          },
+          {
+            "name": "Complete Project",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/complete",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "complete"]
+              }
+            }
+          }
+        ]
+      }
+      ,
+      {
+        "name": "Tasks",
+        "item": [
+          {
+            "name": "Get All Tasks - No filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Get Tasks - Filtro por status y prioridad",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?status=PENDING&priority=HIGH",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "status",
+                    "value": "PENDING"
+                  },
+                  {
+                    "key": "priority",
+                    "value": "HIGH"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Tasks - Filtro por cycle y energy_type",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?cycle=DAILY&energy_type=positive",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "cycle",
+                    "value": "DAILY"
+                  },
+                  {
+                    "key": "energy_type",
+                    "value": "positive"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Tasks - Filtro por proyecto y zona",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?project_id=2&zone_id=3",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "project_id",
+                    "value": "2"
+                  },
+                  {
+                    "key": "zone_id",
+                    "value": "3"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Tasks - Filtro por rango de fechas",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?start_date=2024-01-01&end_date=2024-12-31",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "start_date",
+                    "value": "2024-01-01"
+                  },
+                  {
+                    "key": "end_date",
+                    "value": "2024-12-31"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Tasks - Paginación",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?page=1&limit=5",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "page",
+                    "value": "1"
+                  },
+                  {
+                    "key": "limit",
+                    "value": "5"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Task By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Get Task By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["9999"]
+              }
+            }
+          },
+          {
+            "name": "Create Task",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Tarea de prueba\",\n  \"description\": \"Descripción de prueba\",\n  \"project_id\": 2,\n  \"priority\": \"HIGH\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Update Task",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Tarea Actualizada\",\n  \"description\": \"Descripción actualizada\",\n  \"priority\": \"MEDIUM\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Task",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Complete Task",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/complete",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "complete"]
+              }
+            }
+          },
+          {
+            "name": "Get Overdue Tasks",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/overdue",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["overdue"]
+              }
+            }
+          },
+          {
+            "name": "Mark Overdue Tasks",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/overdue/mark",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["overdue", "mark"]
+              }
+            }
+          }
+        ]
+      }
+      ,
+      {
+        "name": "Habits",
+        "item": [
+          {
+            "name": "Get All Habits - No filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Get Habits - Filtro por activo y frecuencia",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?active=true&frequency=DAILY",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "active",
+                    "value": "true"
+                  },
+                  {
+                    "key": "frequency",
+                    "value": "DAILY"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Habits - Filtro por energía y tipo",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?min_energy=10&max_energy=50&energy_type=positive",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "min_energy",
+                    "value": "10"
+                  },
+                  {
+                    "key": "max_energy",
+                    "value": "50"
+                  },
+                  {
+                    "key": "energy_type",
+                    "value": "positive"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Habits - Filtro por fechas",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?start_date=2024-01-01&end_date=2024-12-31",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "start_date",
+                    "value": "2024-01-01"
+                  },
+                  {
+                    "key": "end_date",
+                    "value": "2024-12-31"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Habits - Paginación",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?page=1&limit=5",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "page",
+                    "value": "1"
+                  },
+                  {
+                    "key": "limit",
+                    "value": "5"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Habit By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Get Habit By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["9999"]
+              }
+            }
+          },
+          {
+            "name": "Create Habit",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Nuevo Hábito\",\n  \"description\": \"Descripción prueba\",\n  \"frequency\": \"DAILY\",\n  \"energy\": 10,\n  \"energy_type\": \"positive\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Update Habit",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Hábito Actualizado\",\n  \"description\": \"Actualización\",\n  \"frequency\": \"WEEKLY\",\n  \"energy\": 5\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Habit",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Complete Habit",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/complete",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "complete"]
+              }
+            }
+          },
+          {
+            "name": "Get Habit Streak",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/streak",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "streak"]
+              }
+            }
+          },
+          {
+            "name": "Get Habit Stats - Sin filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/stats",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "stats"]
+              }
+            }
+          },
+          {
+            "name": "Get Habit Stats - Rango de fechas",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/stats?from_date=2024-01-01&to_date=2024-12-31",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "stats"],
+                "query": [
+                  {
+                    "key": "from_date",
+                    "value": "2024-01-01"
+                  },
+                  {
+                    "key": "to_date",
+                    "value": "2024-12-31"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+      ,
+      {
+        "name": "Journals",
+        "item": [
+          {
+            "name": "Get All Journals - No filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Get Journals - Filtro por fechas y tipo",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/?from_date=2024-01-01&to_date=2024-12-31&type=personal",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""],
+                "query": [
+                  {
+                    "key": "from_date",
+                    "value": "2024-01-01"
+                  },
+                  {
+                    "key": "to_date",
+                    "value": "2024-12-31"
+                  },
+                  {
+                    "key": "type",
+                    "value": "personal"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Journal Today",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/today",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["today"]
+              }
+            }
+          },
+          {
+            "name": "Get Journal By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Get Journal By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["9999"]
+              }
+            }
+          },
+          {
+            "name": "Create Journal",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Mi Diario\",\n  \"type\": \"personal\",\n  \"description\": \"Diario creado desde Postman\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": [""]
+              }
+            }
+          },
+          {
+            "name": "Update Journal",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Mi Diario Actualizado\",\n  \"type\": \"work\",\n  \"description\": \"Actualización de diario\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Journal",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1"]
+              }
+            }
+          },
+          {
+            "name": "Get Journal Stats - Sin filtro",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/stats",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "stats"]
+              }
+            }
+          },
+          {
+            "name": "Get Journal Stats - Rango de fechas",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/stats?from_date=2024-01-01&to_date=2024-12-31",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "stats"],
+                "query": [
+                  {
+                    "key": "from_date",
+                    "value": "2024-01-01"
+                  },
+                  {
+                    "key": "to_date",
+                    "value": "2024-12-31"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Journal Entries",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/entries",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "entries"]
+              }
+            }
+          },
+          {
+            "name": "Get Journal Entry By ID",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/entries/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "entries", "1"]
+              }
+            }
+          },
+          {
+            "name": "Create Journal Entry",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"title\": \"Entrada de prueba\",\n  \"content\": \"Contenido de la entrada\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/1/entries",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "entries"]
+              }
+            }
+          },
+          {
+            "name": "Update Journal Entry",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"title\": \"Entrada actualizada\",\n  \"content\": \"Nuevo contenido\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/1/entries/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "entries", "1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Journal Entry",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/1/entries/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["1", "entries", "1"]
+              }
+            }
+          }
+        ]
+      }
+      ,
+      {
+        "name": "Achievements",
+        "item": [
+          {
+            "name": "List Global Achievements (only_active=true)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/achievements/global",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["achievements", "global"]
+              }
+            }
+          },
+          {
+            "name": "Get Global Achievement By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/achievements/global/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["achievements", "global", "1"]
+              }
+            }
+          },
+          {
+            "name": "Get Global Achievement By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/achievements/global/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["achievements", "global", "9999"]
+              }
+            }
+          },
+          {
+            "name": "Create Global Achievement",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Primer Logro\",\n  \"description\": \"Completa tu primer tarea\",\n  \"condition_type\": \"TASK_COMPLETED\",\n  \"threshold\": 1,\n  \"honorific_title\": \"El Comienzo\",\n  \"is_surprise\": false\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/achievements/global",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["achievements", "global"]
+              }
+            }
+          },
+          {
+            "name": "Update Global Achievement",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Logro Actualizado\",\n  \"description\": \"Actualizado\",\n  \"condition_type\": \"LOGIN_STREAK\",\n  \"threshold\": 5,\n  \"honorific_title\": \"Persistente\",\n  \"is_surprise\": true\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/achievements/global/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["achievements", "global", "1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Global Achievement",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/achievements/global/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["achievements", "global", "1"]
+              }
+            }
+          },
+          {
+            "name": "List My User Achievements",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/achievements/user",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["achievements", "user"]
+              }
+            }
+          },
+          {
+            "name": "Get Specific User Achievement (check if unlocked)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/achievements/user/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["achievements", "user", "1"]
+              }
+            }
+          }
+        ]
+      }
+      ,
+      {
+        "name": "Effects",
+        "item": [
+          {
+            "name": "Get All Effects",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/effects",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["effects"]
+              }
+            }
+          },
+          {
+            "name": "Get Effect By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/effects/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["effects", "1"]
+              }
+            }
+          },
+          {
+            "name": "Get Effect By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/effects/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["effects", "9999"]
+              }
+            }
+          },
+          {
+            "name": "Create Effect",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Efecto Inspiración\",\n  \"description\": \"Aumenta tu motivación un 10%\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/effects",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["effects"]
+              }
+            }
+          },
+          {
+            "name": "Update Effect",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Efecto Actualizado\",\n  \"description\": \"Descripción actualizada\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/effects/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["effects", "1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Effect",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/effects/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["effects", "1"]
+              }
+            }
+          }
+        ]
+      }
+      ,
+      {
+        "name": "Store",
+        "item": [
+          {
+            "name": "List Store Skills - Sin filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/store/skills",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["store", "skills"]
+              }
+            }
+          },
+          {
+            "name": "List Store Skills - Filtro por costo y nivel requerido",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/store/skills?max_cost=100&level_required=3",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["store", "skills"],
+                "query": [
+                  {
+                    "key": "max_cost",
+                    "value": "100"
+                  },
+                  {
+                    "key": "level_required",
+                    "value": "3"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "List Store Skills - Filtro por rareza",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/store/skills?rarity=rare",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["store", "skills"],
+                "query": [
+                  {
+                    "key": "rarity",
+                    "value": "rare"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "List Store Items - Sin filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/store/items",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["store", "items"]
+              }
+            }
+          },
+          {
+            "name": "List Store Items - Filtro por rareza",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/store/items?rarity=epic",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["store", "items"],
+                "query": [
+                  {
+                    "key": "rarity",
+                    "value": "epic"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Purchase Skill - Global Skill",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"skill_id\": 1\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/store/skills/purchase",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["store", "skills", "purchase"]
+              }
+            }
+          },
+          {
+            "name": "Purchase Skill - Skill de Zona",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"skill_id\": 2,\n  \"zone_id\": 3\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/store/skills/purchase",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["store", "skills", "purchase"]
+              }
+            }
+          },
+          {
+            "name": "Purchase Skill - Error (datos incompletos)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/store/skills/purchase",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["store", "skills", "purchase"]
+              }
+            }
+          },
+          {
+            "name": "Purchase Item",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"gear_id\": 1\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/store/items/purchase",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["store", "items", "purchase"]
+              }
+            }
+          },
+          {
+            "name": "Purchase Item - Error (datos incompletos)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/store/items/purchase",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["store", "items", "purchase"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Admin",
+        "item": [
+          {
+            "name": "List All Users",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/admin/users",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "users"]
+              }
+            }
+          },
+          {
+            "name": "Update User Role",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"role\": \"ADMIN\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/admin/users/1/role",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "users", "1", "role"]
+              }
+            }
+          },
+          {
+            "name": "Update User Role - Error (faltan datos)",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/admin/users/1/role",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "users", "1", "role"]
+              }
+            }
+          },
+          {
+            "name": "List Admin Logs - Sin filtro",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/admin/logs",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "logs"]
+              }
+            }
+          },
+          {
+            "name": "List Admin Logs - Filtro por nivel",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/admin/logs?level=ERROR",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "logs"],
+                "query": [
+                  {
+                    "key": "level",
+                    "value": "ERROR"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Delete Admin Log",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/admin/logs/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "logs", "1"]
+              }
+            }
+          },
+          {
+            "name": "List Incidents - Sin filtro",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/admin/incidents",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "incidents"]
+              }
+            }
+          },
+          {
+            "name": "List Incidents - Filtro por status",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/admin/incidents?status=OPEN",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "incidents"],
+                "query": [
+                  {
+                    "key": "status",
+                    "value": "OPEN"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Create Incident",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"type\": \"ERROR\",\n  \"description\": \"Algo salió mal.\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/admin/incidents",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "incidents"]
+              }
+            }
+          },
+          {
+            "name": "Create Incident - Error (datos incompletos)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/admin/incidents",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "incidents"]
+              }
+            }
+          },
+          {
+            "name": "Close Incident",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/admin/incidents/1/close",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "incidents", "1", "close"]
+              }
+            }
+          },
+          {
+            "name": "Reset Global Data",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/admin/reset",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "reset"]
+              }
+            }
+          },
+          {
+            "name": "Generate Report CSV",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/admin/report/csv",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "report", "csv"]
+              }
+            }
+          },
+          {
+            "name": "Generate Report PDF",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/admin/report/pdf",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["admin", "report", "pdf"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Agenda",
+        "item": [
+          {
+            "name": "Get Agenda View - Default (daily, hoy, todo)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/agenda/view",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["agenda", "view"]
+              }
+            }
+          },
+          {
+            "name": "Get Agenda View - Periodo semanal",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/agenda/view?period=weekly",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["agenda", "view"],
+                "query": [
+                  {
+                    "key": "period",
+                    "value": "weekly"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Agenda View - Periodo mensual + fecha específica",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/agenda/view?period=monthly&date=2024-06-01",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["agenda", "view"],
+                "query": [
+                  {
+                    "key": "period",
+                    "value": "monthly"
+                  },
+                  {
+                    "key": "date",
+                    "value": "2024-06-01"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Agenda View - Filtro por zona y tipos",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/agenda/view?zone_id=3&types=task,habit",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["agenda", "view"],
+                "query": [
+                  {
+                    "key": "zone_id",
+                    "value": "3"
+                  },
+                  {
+                    "key": "types",
+                    "value": "task,habit"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Agenda View - Export ICS",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/agenda/view?period=weekly&export=ics",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["agenda", "view"],
+                "query": [
+                  {
+                    "key": "period",
+                    "value": "weekly"
+                  },
+                  {
+                    "key": "export",
+                    "value": "ics"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Agenda View - Error (periodo inválido)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/agenda/view?period=yearly",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["agenda", "view"],
+                "query": [
+                  {
+                    "key": "period",
+                    "value": "yearly"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Gear",
+        "item": [
+          {
+            "name": "Get All Gears - Sin filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/gears",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["gears"]
+              }
+            }
+          },
+          {
+            "name": "Get All Gears - Filtro por tipo y consumible",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/gears?type=mental&consumable=true",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["gears"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "mental"
+                  },
+                  {
+                    "key": "consumable",
+                    "value": "true"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get All Gears - Filtro por rango de coste",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/gears?min_cost=10&max_cost=100",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["gears"],
+                "query": [
+                  {
+                    "key": "min_cost",
+                    "value": "10"
+                  },
+                  {
+                    "key": "max_cost",
+                    "value": "100"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get All Gears - Filtro por rareza",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/gears?rarity=epic",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["gears"],
+                "query": [
+                  {
+                    "key": "rarity",
+                    "value": "epic"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Gear By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/gears/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["gears", "1"]
+              }
+            }
+          },
+          {
+            "name": "Get Gear By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/gears/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["gears", "9999"]
+              }
+            }
+          },
+          {
+            "name": "Create Gear",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Poción de enfoque\",\n  \"type\": \"mental\",\n  \"consumable\": true,\n  \"cost\": 50,\n  \"rarity\": \"rare\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/gears",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["gears"]
+              }
+            }
+          },
+          {
+            "name": "Update Gear",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Poción Actualizada\",\n  \"cost\": 75\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/gears/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["gears", "1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Gear",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/gears/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["gears", "1"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Inventory",
+        "item": [
+          {
+            "name": "Get Inventory - Sin filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/inventory",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory"]
+              }
+            }
+          },
+          {
+            "name": "Get Inventory - Filtro por tipo",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/inventory?gear_type=mental",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory"],
+                "query": [
+                  {
+                    "key": "gear_type",
+                    "value": "mental"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Inventory - Filtro por usos",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/inventory?min_uses=1&max_uses=5",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory"],
+                "query": [
+                  {
+                    "key": "min_uses",
+                    "value": "1"
+                  },
+                  {
+                    "key": "max_uses",
+                    "value": "5"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Inventory - Filtro por fechas",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/inventory?acquired_from=2023-01-01&acquired_to=2023-12-31",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory"],
+                "query": [
+                  {
+                    "key": "acquired_from",
+                    "value": "2023-01-01"
+                  },
+                  {
+                    "key": "acquired_to",
+                    "value": "2023-12-31"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Inventory - Filtros combinados",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/inventory?gear_type=physical&min_uses=2&acquired_from=2023-06-01",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory"],
+                "query": [
+                  {
+                    "key": "gear_type",
+                    "value": "physical"
+                  },
+                  {
+                    "key": "min_uses",
+                    "value": "2"
+                  },
+                  {
+                    "key": "acquired_from",
+                    "value": "2023-06-01"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Inventory Item By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/inventory/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory", "1"]
+              }
+            }
+          },
+          {
+            "name": "Get Inventory Item By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/inventory/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory", "9999"]
+              }
+            }
+          },
+          {
+            "name": "Add Gear to User Inventory",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"gear_id\": 1,\n  \"remaining_uses\": 3\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/inventory",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory"]
+              }
+            }
+          },
+          {
+            "name": "Update Inventory Item",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"remaining_uses\": 5\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/inventory/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory", "1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Inventory Item",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/inventory/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory", "1"]
+              }
+            }
+          },
+          {
+            "name": "Use Inventory Item",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/inventory/1/use",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["inventory", "1", "use"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Log Entries",
+        "item": [
+          {
+            "name": "Get All Log Entries - Sin filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/log-entries",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["log-entries"]
+              }
+            }
+          },
+          {
+            "name": "Get All Log Entries - Filtro por type y zone_id",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/log-entries?type=TASK&zone_id=2",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["log-entries"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "TASK"
+                  },
+                  {
+                    "key": "zone_id",
+                    "value": "2"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get All Log Entries - Filtro por fechas",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/log-entries?from_date=2023-06-01&to_date=2023-06-30",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["log-entries"],
+                "query": [
+                  {
+                    "key": "from_date",
+                    "value": "2023-06-01"
+                  },
+                  {
+                    "key": "to_date",
+                    "value": "2023-06-30"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get All Log Entries - Filtros combinados",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/log-entries?type=HABIT&zone_id=3&from_date=2023-01-01&to_date=2023-12-31",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["log-entries"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "HABIT"
+                  },
+                  {
+                    "key": "zone_id",
+                    "value": "3"
+                  },
+                  {
+                    "key": "from_date",
+                    "value": "2023-01-01"
+                  },
+                  {
+                    "key": "to_date",
+                    "value": "2023-12-31"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Create Log Entry",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"challenge_level\": \"NORMAL\",\n  \"type\": \"TASK\",\n  \"item_id\": 12,\n  \"end_timestamp\": \"2023-06-30\",\n  \"energy\": 10,\n  \"zone_id\": 2\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/log-entries",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["log-entries"]
+              }
+            }
+          },
+          {
+            "name": "Delete Log Entry",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/log-entries/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["log-entries", "1"]
+              }
+            }
+          },
+          {
+            "name": "Get Log Summary - Daily (7 días)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/log-entries/summary?range=daily&days_back=7",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["log-entries", "summary"],
+                "query": [
+                  {
+                    "key": "range",
+                    "value": "daily"
+                  },
+                  {
+                    "key": "days_back",
+                    "value": "7"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Log Summary - Weekly (30 días)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/log-entries/summary?range=weekly&days_back=30",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["log-entries", "summary"],
+                "query": [
+                  {
+                    "key": "range",
+                    "value": "weekly"
+                  },
+                  {
+                    "key": "days_back",
+                    "value": "30"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Log Summary - Error (range inválido)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/log-entries/summary?range=yearly",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["log-entries", "summary"],
+                "query": [
+                  {
+                    "key": "range",
+                    "value": "yearly"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Materials",
+        "item": [
+          {
+            "name": "Get All Materials - Sin filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/materials",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["materials"]
+              }
+            }
+          },
+          {
+            "name": "Get All Materials - Filtro por tipo",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/materials?type=video",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["materials"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "video"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get All Materials - Filtro por palabra clave",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/materials?query=angular",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["materials"],
+                "query": [
+                  {
+                    "key": "query",
+                    "value": "angular"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get All Materials - Filtro por project_id",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/materials?project_id=3",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["materials"],
+                "query": [
+                  {
+                    "key": "project_id",
+                    "value": "3"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get All Materials - Filtros combinados",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/materials?type=documento&query=flask&project_id=1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["materials"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "documento"
+                  },
+                  {
+                    "key": "query",
+                    "value": "flask"
+                  },
+                  {
+                    "key": "project_id",
+                    "value": "1"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Material By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/materials/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["materials", "1"]
+              }
+            }
+          },
+          {
+            "name": "Get Material By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/materials/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["materials", "9999"]
+              }
+            }
+          },
+          {
+            "name": "Create Material",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Guía Flask\",\n  \"type\": \"documento\",\n  \"description\": \"Documentación de Flask\",\n  \"url\": \"https://flask.palletsprojects.com/\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/materials",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["materials"]
+              }
+            }
+          },
+          {
+            "name": "Update Material",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"description\": \"Actualización de la guía Flask\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/materials/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["materials", "1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Material",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/materials/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["materials", "1"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Notifications",
+        "item": [
+          {
+            "name": "Get Notifications - Sin filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/notifications",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["notifications"]
+              }
+            }
+          },
+          {
+            "name": "Get Notifications - Filtro por tipo",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/notifications?type=reminder",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["notifications"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "reminder"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Create Notification",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"message\": \"Recordatorio de tarea\",\n  \"type\": \"reminder\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/notifications",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["notifications"]
+              }
+            }
+          },
+          {
+            "name": "Create Notification - Error (datos incompletos)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/notifications",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["notifications"]
+              }
+            }
+          },
+          {
+            "name": "Mark Notification As Read",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/notifications/1/read",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["notifications", "1", "read"]
+              }
+            }
+          },
+          {
+            "name": "Mark Notification As Read - Error (no existe)",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/notifications/9999/read",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["notifications", "9999", "read"]
+              }
+            }
+          },
+          {
+            "name": "Mark All Notifications As Read",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/notifications/read-all",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["notifications", "read-all"]
+              }
+            }
+          },
+          {
+            "name": "Delete Notification",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/notifications/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["notifications", "1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Notification - Error (no existe)",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/notifications/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["notifications", "9999"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Search",
+        "item": [
+          {
+            "name": "Global Search - Búsqueda simple (todo)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/search?q=estudio",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["search"],
+                "query": [
+                  {
+                    "key": "q",
+                    "value": "estudio"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Global Search - Búsqueda por tipos (task, habit)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/search?q=mañana&types=task,habit",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["search"],
+                "query": [
+                  {
+                    "key": "q",
+                    "value": "mañana"
+                  },
+                  {
+                    "key": "types",
+                    "value": "task,habit"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Global Search - Filtro por zona",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/search?q=proyecto&zone_id=3",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["search"],
+                "query": [
+                  {
+                    "key": "q",
+                    "value": "proyecto"
+                  },
+                  {
+                    "key": "zone_id",
+                    "value": "3"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Global Search - Filtros combinados (types + zone_id)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/search?q=flask&types=material,project&zone_id=2",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["search"],
+                "query": [
+                  {
+                    "key": "q",
+                    "value": "flask"
+                  },
+                  {
+                    "key": "types",
+                    "value": "material,project"
+                  },
+                  {
+                    "key": "zone_id",
+                    "value": "2"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Global Search - Error (sin query)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/search",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["search"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Skills",
+        "item": [
+          {
+            "name": "Get All Skills - Sin filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/skills",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills"]
+              }
+            }
+          },
+          {
+            "name": "Get All Skills - Filtro por type",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/skills?type=mental",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "mental"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get All Skills - Filtro por nivel",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/skills?min_level=2&max_level=5",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills"],
+                "query": [
+                  {
+                    "key": "min_level",
+                    "value": "2"
+                  },
+                  {
+                    "key": "max_level",
+                    "value": "5"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get All Skills - Filtro por coste",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/skills?min_cost=10&max_cost=100",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills"],
+                "query": [
+                  {
+                    "key": "min_cost",
+                    "value": "10"
+                  },
+                  {
+                    "key": "max_cost",
+                    "value": "100"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get All Skills - Filtros combinados",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/skills?type=physical&min_level=1&max_level=3&min_cost=20&max_cost=50",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "physical"
+                  },
+                  {
+                    "key": "min_level",
+                    "value": "1"
+                  },
+                  {
+                    "key": "max_level",
+                    "value": "3"
+                  },
+                  {
+                    "key": "min_cost",
+                    "value": "20"
+                  },
+                  {
+                    "key": "max_cost",
+                    "value": "50"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Skill By ID - Success",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/skills/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills", "1"]
+              }
+            }
+          },
+          {
+            "name": "Get Skill By ID - Error (no existe)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/skills/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills", "9999"]
+              }
+            }
+          },
+          {
+            "name": "Create Skill",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Memoria Rápida\",\n  \"type\": \"mental\",\n  \"cost\": 50,\n  \"level_required\": 2\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/skills",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills"]
+              }
+            }
+          },
+          {
+            "name": "Create Skill - Error (datos incompletos)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/skills",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills"]
+              }
+            }
+          },
+          {
+            "name": "Update Skill",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Memoria Avanzada\",\n  \"cost\": 75\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/skills/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills", "1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Skill",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/skills/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills", "1"]
+              }
+            }
+          },
+          {
+            "name": "Use Skill",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/skills/use/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["skills", "use", "1"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Stats",
+        "item": [
+          {
+            "name": "Get User Stats - Sin refresh",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/stats/user",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["stats", "user"]
+              }
+            }
+          },
+          {
+            "name": "Get User Stats - Con refresh_energy",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/stats/user?refresh_energy=true",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["stats", "user"],
+                "query": [
+                  {
+                    "key": "refresh_energy",
+                    "value": "true"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Zone Stats - Sin refresh",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/stats/zone/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["stats", "zone", "1"]
+              }
+            }
+          },
+          {
+            "name": "Get Zone Stats - Con refresh_energy",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/stats/zone/1?refresh_energy=true",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["stats", "zone", "1"],
+                "query": [
+                  {
+                    "key": "refresh_energy",
+                    "value": "true"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Stats History - Energy (7 días por defecto)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/stats/history?type=energy",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["stats", "history"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "energy"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Stats History - XP (30 días)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/stats/history?type=xp&days_back=30",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["stats", "history"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "xp"
+                  },
+                  {
+                    "key": "days_back",
+                    "value": "30"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Stats History - Level (15 días)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/stats/history?type=level&days_back=15",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["stats", "history"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "level"
+                  },
+                  {
+                    "key": "days_back",
+                    "value": "15"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Get Stats History - Error (type inválido)",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/stats/history?type=invalid",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["stats", "history"],
+                "query": [
+                  {
+                    "key": "type",
+                    "value": "invalid"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Templates",
+        "item": [
+          {
+            "name": "Get All Templates - Sin filtros",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/templates",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["templates"]
+              }
+            }
+          },
+          {
+            "name": "Get All Templates - Filtro por category",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/templates?category=habit",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["templates"],
+                "query": [
+                  {
+                    "key": "category",
+                    "value": "habit"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Create Template",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Plantilla Diario\",\n  \"description\": \"Rutina matutina\",\n  \"energy\": 10,\n  \"points\": 20,\n  \"priority\": \"HIGH\",\n  \"cycle\": \"DAILY\",\n  \"category\": \"habit\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/templates",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["templates"]
+              }
+            }
+          },
+          {
+            "name": "Create Template - Error (datos incompletos)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/templates",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["templates"]
+              }
+            }
+          },
+          {
+            "name": "Update Template",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"description\": \"Rutina diaria actualizada\"\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/templates/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["templates", "1"]
+              }
+            }
+          },
+          {
+            "name": "Delete Template",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/templates/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["templates", "1"]
+              }
+            }
+          },
+          {
+            "name": "Use Template - Sin datos extra",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/templates/use/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["templates", "use", "1"]
+              }
+            }
+          },
+          {
+            "name": "Use Template - Con datos personalizados",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"name\": \"Mi rutina personalizada\",\n  \"energy\": 15\n}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/templates/use/1",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["templates", "use", "1"]
+              }
+            }
+          },
+          {
+            "name": "Use Template - Error (ID inexistente)",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{access_token}}"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/templates/use/9999",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["templates", "use", "9999"]
+              }
+            }
+          }
+        ]
+      }      
+    ]
+  }
+  
