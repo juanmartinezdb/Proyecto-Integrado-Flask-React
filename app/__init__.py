@@ -12,9 +12,17 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
+    # Configuración de CORS
+    cors = CORS(app, resources={
+        r"/*": {
+            "origins": ["http://localhost:3000"],
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"]
+        }
+    })
+
     db.init_app(app)
     jwt.init_app(app)
-    CORS(app)
 
     # Importar TODOS los modelos para que SQLAlchemy los reconozca
     from app.models import (

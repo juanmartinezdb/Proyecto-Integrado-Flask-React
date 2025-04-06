@@ -1,0 +1,728 @@
+CREATE DATABASE  IF NOT EXISTS `iterpolarisflask` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `iterpolarisflask`;
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+--
+-- Host: localhost    Database: iterpolarisflask
+-- ------------------------------------------------------
+-- Server version	8.0.36
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `achievement`
+--
+
+DROP TABLE IF EXISTS `achievement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `achievement` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `threshold` int DEFAULT NULL,
+  `unlocked` tinyint(1) DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `achievement_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `achievement`
+--
+
+LOCK TABLES `achievement` WRITE;
+/*!40000 ALTER TABLE `achievement` DISABLE KEYS */;
+/*!40000 ALTER TABLE `achievement` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admin_log`
+--
+
+DROP TABLE IF EXISTS `admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admin_log` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `level` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin_log`
+--
+
+LOCK TABLES `admin_log` WRITE;
+/*!40000 ALTER TABLE `admin_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `admin_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `effect`
+--
+
+DROP TABLE IF EXISTS `effect`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `effect` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logic_key` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `target_entities` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `logic_key` (`logic_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `effect`
+--
+
+LOCK TABLES `effect` WRITE;
+/*!40000 ALTER TABLE `effect` DISABLE KEYS */;
+/*!40000 ALTER TABLE `effect` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gear`
+--
+
+DROP TABLE IF EXISTS `gear`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `gear` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `max_uses` int DEFAULT NULL,
+  `cost` int DEFAULT NULL,
+  `level_required` int DEFAULT NULL,
+  `consumable` tinyint(1) DEFAULT NULL,
+  `rarity` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `effect_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `effect_id` (`effect_id`),
+  CONSTRAINT `gear_ibfk_1` FOREIGN KEY (`effect_id`) REFERENCES `effect` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gear`
+--
+
+LOCK TABLES `gear` WRITE;
+/*!40000 ALTER TABLE `gear` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gear` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `habit`
+--
+
+DROP TABLE IF EXISTS `habit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `habit` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  `energy` int DEFAULT NULL,
+  `points` int DEFAULT NULL,
+  `frequency` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `streak` int DEFAULT NULL,
+  `total_check` int DEFAULT NULL,
+  `challenge_level` enum('MUY_FACIL','FACIL','NORMAL','DIFICIL','MUY_DIFICIL') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zone_id` int DEFAULT NULL,
+  `effect_id` int DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `zone_id` (`zone_id`),
+  KEY `effect_id` (`effect_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `habit_ibfk_1` FOREIGN KEY (`zone_id`) REFERENCES `zone` (`id`),
+  CONSTRAINT `habit_ibfk_2` FOREIGN KEY (`effect_id`) REFERENCES `effect` (`id`),
+  CONSTRAINT `habit_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `habit`
+--
+
+LOCK TABLES `habit` WRITE;
+/*!40000 ALTER TABLE `habit` DISABLE KEYS */;
+/*!40000 ALTER TABLE `habit` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `incident`
+--
+
+DROP TABLE IF EXISTS `incident`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `incident` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `reported_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `incident`
+--
+
+LOCK TABLES `incident` WRITE;
+/*!40000 ALTER TABLE `incident` DISABLE KEYS */;
+/*!40000 ALTER TABLE `incident` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `inventory_item`
+--
+
+DROP TABLE IF EXISTS `inventory_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `inventory_item` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `remaining_uses` int DEFAULT NULL,
+  `acquired_at` datetime DEFAULT NULL,
+  `gear_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `gear_id` (`gear_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `inventory_item_ibfk_1` FOREIGN KEY (`gear_id`) REFERENCES `gear` (`id`),
+  CONSTRAINT `inventory_item_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `inventory_item`
+--
+
+LOCK TABLES `inventory_item` WRITE;
+/*!40000 ALTER TABLE `inventory_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inventory_item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `journal`
+--
+
+DROP TABLE IF EXISTS `journal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `journal` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_entry_date` date DEFAULT NULL,
+  `streak` int DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `journal_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `journal`
+--
+
+LOCK TABLES `journal` WRITE;
+/*!40000 ALTER TABLE `journal` DISABLE KEYS */;
+/*!40000 ALTER TABLE `journal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `journal_entry`
+--
+
+DROP TABLE IF EXISTS `journal_entry`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `journal_entry` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `edited_at` date DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci,
+  `points` int DEFAULT NULL,
+  `energy` int DEFAULT NULL,
+  `journal_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `journal_id` (`journal_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `journal_entry_ibfk_1` FOREIGN KEY (`journal_id`) REFERENCES `journal` (`id`),
+  CONSTRAINT `journal_entry_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `journal_entry`
+--
+
+LOCK TABLES `journal_entry` WRITE;
+/*!40000 ALTER TABLE `journal_entry` DISABLE KEYS */;
+/*!40000 ALTER TABLE `journal_entry` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `log_entry`
+--
+
+DROP TABLE IF EXISTS `log_entry`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `log_entry` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `challenge_level` enum('MUY_FACIL','FACIL','NORMAL','DIFICIL','MUY_DIFICIL') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_id` int DEFAULT NULL,
+  `end_timestamp` date DEFAULT NULL,
+  `energy` int DEFAULT NULL,
+  `user_id` int NOT NULL,
+  `zone_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `zone_id` (`zone_id`),
+  CONSTRAINT `log_entry_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `log_entry_ibfk_2` FOREIGN KEY (`zone_id`) REFERENCES `zone` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `log_entry`
+--
+
+LOCK TABLES `log_entry` WRITE;
+/*!40000 ALTER TABLE `log_entry` DISABLE KEYS */;
+/*!40000 ALTER TABLE `log_entry` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `material`
+--
+
+DROP TABLE IF EXISTS `material`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `material` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `material_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `material`
+--
+
+LOCK TABLES `material` WRITE;
+/*!40000 ALTER TABLE `material` DISABLE KEYS */;
+/*!40000 ALTER TABLE `material` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `notification`
+--
+
+DROP TABLE IF EXISTS `notification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notification` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `message` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_read` tinyint(1) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `notification_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notification`
+--
+
+LOCK TABLES `notification` WRITE;
+/*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+/*!40000 ALTER TABLE `notification` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `personal_data`
+--
+
+DROP TABLE IF EXISTS `personal_data`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `personal_data` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `first_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gender` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `occupation` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`),
+  CONSTRAINT `personal_data_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `personal_data`
+--
+
+LOCK TABLES `personal_data` WRITE;
+/*!40000 ALTER TABLE `personal_data` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personal_data` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `project`
+--
+
+DROP TABLE IF EXISTS `project`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `project` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `points` int DEFAULT NULL,
+  `energy` int DEFAULT NULL,
+  `challenge_level` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `priority` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zone_id` int DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `zone_id` (`zone_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `project_ibfk_1` FOREIGN KEY (`zone_id`) REFERENCES `zone` (`id`),
+  CONSTRAINT `project_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `project`
+--
+
+LOCK TABLES `project` WRITE;
+/*!40000 ALTER TABLE `project` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `project_habits`
+--
+
+DROP TABLE IF EXISTS `project_habits`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `project_habits` (
+  `project_id` int NOT NULL,
+  `habit_id` int NOT NULL,
+  PRIMARY KEY (`project_id`,`habit_id`),
+  KEY `habit_id` (`habit_id`),
+  CONSTRAINT `project_habits_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
+  CONSTRAINT `project_habits_ibfk_2` FOREIGN KEY (`habit_id`) REFERENCES `habit` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `project_habits`
+--
+
+LOCK TABLES `project_habits` WRITE;
+/*!40000 ALTER TABLE `project_habits` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project_habits` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `project_materials`
+--
+
+DROP TABLE IF EXISTS `project_materials`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `project_materials` (
+  `id_project` int NOT NULL,
+  `id_material` int NOT NULL,
+  PRIMARY KEY (`id_project`,`id_material`),
+  KEY `id_material` (`id_material`),
+  CONSTRAINT `project_materials_ibfk_1` FOREIGN KEY (`id_project`) REFERENCES `project` (`id`),
+  CONSTRAINT `project_materials_ibfk_2` FOREIGN KEY (`id_material`) REFERENCES `material` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `project_materials`
+--
+
+LOCK TABLES `project_materials` WRITE;
+/*!40000 ALTER TABLE `project_materials` DISABLE KEYS */;
+/*!40000 ALTER TABLE `project_materials` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `skill`
+--
+
+DROP TABLE IF EXISTS `skill`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `skill` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `is_zone_skill` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `level_required` int DEFAULT NULL,
+  `cost` int DEFAULT NULL,
+  `mana` int DEFAULT NULL,
+  `icon` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `effect_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `effect_id` (`effect_id`),
+  CONSTRAINT `skill_ibfk_1` FOREIGN KEY (`effect_id`) REFERENCES `effect` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `skill`
+--
+
+LOCK TABLES `skill` WRITE;
+/*!40000 ALTER TABLE `skill` DISABLE KEYS */;
+/*!40000 ALTER TABLE `skill` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `task`
+--
+
+DROP TABLE IF EXISTS `task`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `task` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `energy` int DEFAULT NULL,
+  `points` int DEFAULT NULL,
+  `challenge_level` enum('MUY_FACIL','FACIL','NORMAL','DIFICIL','MUY_DIFICIL') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `priority` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cycle` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  `user_id` int NOT NULL,
+  `project_id` int DEFAULT NULL,
+  `parent_task_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `project_id` (`project_id`),
+  KEY `parent_task_id` (`parent_task_id`),
+  CONSTRAINT `task_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `task_ibfk_2` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
+  CONSTRAINT `task_ibfk_3` FOREIGN KEY (`parent_task_id`) REFERENCES `task` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `task`
+--
+
+LOCK TABLES `task` WRITE;
+/*!40000 ALTER TABLE `task` DISABLE KEYS */;
+/*!40000 ALTER TABLE `task` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `template`
+--
+
+DROP TABLE IF EXISTS `template`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `template` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `energy` int DEFAULT NULL,
+  `points` int DEFAULT NULL,
+  `priority` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cycle` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `template_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `template`
+--
+
+LOCK TABLES `template` WRITE;
+/*!40000 ALTER TABLE `template` DISABLE KEYS */;
+/*!40000 ALTER TABLE `template` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('USER','ADMIN') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `energy` int DEFAULT NULL,
+  `points` int DEFAULT NULL,
+  `xp` int DEFAULT NULL,
+  `skill_points` int DEFAULT NULL,
+  `level` int DEFAULT NULL,
+  `mana` int DEFAULT NULL,
+  `streak` int DEFAULT NULL,
+  `theme_color` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avatar_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `background_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coins` int DEFAULT NULL,
+  `blue_gems` int DEFAULT NULL,
+  `reset_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reset_token_expires` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zone`
+--
+
+DROP TABLE IF EXISTS `zone`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `zone` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `color` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `energy` int DEFAULT NULL,
+  `xp` int DEFAULT NULL,
+  `level` int DEFAULT NULL,
+  `yellow_gems` int DEFAULT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `zone_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zone`
+--
+
+LOCK TABLES `zone` WRITE;
+/*!40000 ALTER TABLE `zone` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zone` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-03-31 19:13:35

@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos globales */
+:root {
+  /* Paleta de colores de fantasía */
+  --color-primary: #6a4dbc; /* Púrpura */
+  --color-secondary: #f0e6d2; /* Beige claro */
+  --color-accent: #ffcc33; /* Dorado */
+  --color-success: #4caf50; /* Verde */
+  --color-warning: #ff9800; /* Naranja */
+  --color-danger: #f44336; /* Rojo */
+  --color-info: #2196f3; /* Azul */
+  
+  /* Colores de energía */
+  --color-energy-negative: #3b82f6; /* Azul frío */
+  --color-energy-balanced: #10b981; /* Verde equilibrado */
+  --color-energy-positive: #ef4444; /* Rojo cálido */
+  
+  /* Colores de fondo y texto */
+  --color-background: #f8f5f0; /* Fondo claro pero no blanco puro */
+  --color-surface: #ffffff;
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  
+  /* Espaciado */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Bordes */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-circle: 50%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Clases de utilidad */
+.text-center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slideInUp {
+  animation: slideInUp 0.5s ease-in-out;
+}

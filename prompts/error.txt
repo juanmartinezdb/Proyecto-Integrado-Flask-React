@@ -1,0 +1,177 @@
+Source map error: No sources are declared in this source map.
+Resource URL: http://localhost:3000/node_modules/.vite/deps/react.js?v=acaf8789
+Source Map URL: react.js.map
+
+Source map error: No sources are declared in this source map.
+Resource URL: http://localhost:3000/node_modules/.vite/deps/chunk-V4OQ3NZ2.js?v=306639fa
+Source Map URL: chunk-V4OQ3NZ2.js.map
+
+Source map error: No sources are declared in this source map.
+Resource URL: http://localhost:3000/node_modules/.vite/deps/@mui_material.js?v=ca864f9f
+Source Map URL: @mui_material.js.map
+
+Source map error: No sources are declared in this source map.
+Resource URL: http://localhost:3000/node_modules/.vite/deps/@mui_material_styles.js?v=7facbec8
+Source Map URL: @mui_material_styles.js.map
+
+[vite] connecting... client:495:8
+[vite] connected. client:618:14
+Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools react-dom.development.js:29895:16
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition. deprecations.ts:9:12
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath. deprecations.ts:9:12
+Uncaught TypeError: theme.palette.accent is undefined
+    XPProgressBar UserProfile.jsx:12
+    processStyleArg createStyled.js:66
+    node_modules chunk-3W3QZDB4.js:5888
+    handleInterpolation emotion-serialize.development.esm.js:142
+    serializeStyles emotion-serialize.development.esm.js:254
+    node_modules chunk-3W3QZDB4.js:3297
+    node_modules chunk-3W3QZDB4.js:1689
+    React 11
+    workLoop scheduler.development.js:266
+    flushWork scheduler.development.js:239
+    performWorkUntilDeadline scheduler.development.js:533
+    js scheduler.development.js:571
+    js scheduler.development.js:633
+    __require chunk-V4OQ3NZ2.js:11
+    js index.js:6
+    __require chunk-V4OQ3NZ2.js:11
+    React 2
+    __require chunk-V4OQ3NZ2.js:11
+    js React
+    __require chunk-V4OQ3NZ2.js:11
+    js React
+    __require chunk-V4OQ3NZ2.js:11
+    <anonymous> react-dom_client.js:38
+UserProfile.jsx:12:4
+    XPProgressBar UserProfile.jsx:12
+    processStyleArg createStyled.js:66
+    transformStyleArg createStyled.js:172
+    handleInterpolation emotion-serialize.development.esm.js:142
+    serializeStyles emotion-serialize.development.esm.js:254
+    Styled emotion-styled-base.browser.development.esm.js:128
+    withEmotionCache2 emotion-element-489459f2.browser.development.esm.js:34
+    React 11
+    workLoop scheduler.development.js:266
+    flushWork scheduler.development.js:239
+    performWorkUntilDeadline scheduler.development.js:533
+    (Async: EventHandlerNonNull)
+    js scheduler.development.js:571
+    js scheduler.development.js:633
+    __require chunk-V4OQ3NZ2.js:11
+    js index.js:6
+    __require chunk-V4OQ3NZ2.js:11
+    React 2
+    __require chunk-V4OQ3NZ2.js:11
+    js React
+    __require chunk-V4OQ3NZ2.js:11
+    js React
+    __require chunk-V4OQ3NZ2.js:11
+    <anonymous> react-dom_client.js:38
+Uncaught TypeError: theme.palette.accent is undefined
+    XPProgressBar UserProfile.jsx:12
+    processStyleArg createStyled.js:66
+    node_modules chunk-3W3QZDB4.js:5888
+    handleInterpolation emotion-serialize.development.esm.js:142
+    serializeStyles emotion-serialize.development.esm.js:254
+    node_modules chunk-3W3QZDB4.js:3297
+    node_modules chunk-3W3QZDB4.js:1689
+    React 12
+    workLoop scheduler.development.js:266
+    flushWork scheduler.development.js:239
+    performWorkUntilDeadline scheduler.development.js:533
+    js scheduler.development.js:571
+    js scheduler.development.js:633
+    __require chunk-V4OQ3NZ2.js:11
+    js index.js:6
+    __require chunk-V4OQ3NZ2.js:11
+    React 2
+    __require chunk-V4OQ3NZ2.js:11
+    js React
+    __require chunk-V4OQ3NZ2.js:11
+    js React
+    __require chunk-V4OQ3NZ2.js:11
+    <anonymous> react-dom_client.js:38
+UserProfile.jsx:12:4
+The above error occurred in the <Styled(ForwardRef(LinearProgress2))> component:
+
+node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js/withEmotionCache2/<@http://localhost:3000/node_modules/.vite/deps/chunk-3W3QZDB4.js?v=306639fa:1688:50
+Tooltip2@http://localhost:3000/node_modules/.vite/deps/chunk-5FHHVEOJ.js?v=306639fa:32281:32
+div
+node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js/withEmotionCache2/<@http://localhost:3000/node_modules/.vite/deps/chunk-3W3QZDB4.js?v=306639fa:1688:50
+Box3@http://localhost:3000/node_modules/.vite/deps/chunk-MYYM3EPW.js?v=306639fa:320:35
+div
+node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js/withEmotionCache2/<@http://localhost:3000/node_modules/.vite/deps/chunk-3W3QZDB4.js?v=306639fa:1688:50
+Box3@http://localhost:3000/node_modules/.vite/deps/chunk-MYYM3EPW.js?v=306639fa:320:35
+div
+node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js/withEmotionCache2/<@http://localhost:3000/node_modules/.vite/deps/chunk-3W3QZDB4.js?v=306639fa:1688:50
+Box3@http://localhost:3000/node_modules/.vite/deps/chunk-MYYM3EPW.js?v=306639fa:320:35
+UserProfile@http://localhost:3000/src/components/sidebar/UserProfile.jsx:31:21
+div
+node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js/withEmotionCache2/<@http://localhost:3000/node_modules/.vite/deps/chunk-3W3QZDB4.js?v=306639fa:1688:50
+Box3@http://localhost:3000/node_modules/.vite/deps/chunk-MYYM3EPW.js?v=306639fa:320:35
+div
+node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js/withEmotionCache2/<@http://localhost:3000/node_modules/.vite/deps/chunk-3W3QZDB4.js?v=306639fa:1688:50
+Paper2@http://localhost:3000/node_modules/.vite/deps/chunk-5FHHVEOJ.js?v=306639fa:2115:32
+node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js/withEmotionCache2/<@http://localhost:3000/node_modules/.vite/deps/chunk-3W3QZDB4.js?v=306639fa:1688:50
+div
+node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js/withEmotionCache2/<@http://localhost:3000/node_modules/.vite/deps/chunk-3W3QZDB4.js?v=306639fa:1688:50
+Drawer2@http://localhost:3000/node_modules/.vite/deps/chunk-5FHHVEOJ.js?v=306639fa:17425:32
+div
+node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js/withEmotionCache2/<@http://localhost:3000/node_modules/.vite/deps/chunk-3W3QZDB4.js?v=306639fa:1688:50
+Box3@http://localhost:3000/node_modules/.vite/deps/chunk-MYYM3EPW.js?v=306639fa:320:35
+MainLayout@http://localhost:3000/src/layouts/MainLayout.jsx?t=1743960157724:104:35
+ProtectedRoute@http://localhost:3000/src/App.jsx?t=1743960157724:43:26
+RenderedRoute@http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=6ea55a2b:4092:7
+Routes@http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=6ea55a2b:4561:7
+div
+node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js/withEmotionCache2/<@http://localhost:3000/node_modules/.vite/deps/chunk-3W3QZDB4.js?v=306639fa:1688:50
+Box3@http://localhost:3000/node_modules/.vite/deps/chunk-MYYM3EPW.js?v=306639fa:320:35
+App@http://localhost:3000/src/App.jsx?t=1743960157724:40:40
+AuthProvider@http://localhost:3000/src/contexts/AuthContext.jsx?t=1743960157724:27:29
+ThemeProvider@http://localhost:3000/src/contexts/ThemeContext.jsx:138:30
+Router@http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=6ea55a2b:4509:7
+BrowserRouter@http://localhost:3000/node_modules/.vite/deps/react-router-dom.js?v=6ea55a2b:5252:7
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries. react-dom.development.js:18704:14
+Uncaught TypeError: theme.palette.accent is undefined
+    XPProgressBar UserProfile.jsx:12
+    processStyleArg createStyled.js:66
+    node_modules chunk-3W3QZDB4.js:5888
+    handleInterpolation emotion-serialize.development.esm.js:142
+    serializeStyles emotion-serialize.development.esm.js:254
+    node_modules chunk-3W3QZDB4.js:3297
+    node_modules chunk-3W3QZDB4.js:1689
+    React 9
+    workLoop scheduler.development.js:266
+    flushWork scheduler.development.js:239
+    performWorkUntilDeadline scheduler.development.js:533
+    js scheduler.development.js:571
+    js scheduler.development.js:633
+    __require chunk-V4OQ3NZ2.js:11
+    js index.js:6
+    __require chunk-V4OQ3NZ2.js:11
+    React 2
+    __require chunk-V4OQ3NZ2.js:11
+    js React
+    __require chunk-V4OQ3NZ2.js:11
+    js React
+    __require chunk-V4OQ3NZ2.js:11
+    <anonymous> react-dom_client.js:38
+UserProfile.jsx:12:4
+Source map error: No sources are declared in this source map.
+Resource URL: http://localhost:3000/node_modules/.vite/deps/chunk-V4OQ3NZ2.js?v=306639fa
+Source Map URL: chunk-V4OQ3NZ2.js.map
+
+Source map error: No sources are declared in this source map.
+Resource URL: http://localhost:3000/node_modules/.vite/deps/react.js?v=acaf8789
+Source Map URL: react.js.map
+
+Source map error: No sources are declared in this source map.
+Resource URL: http://localhost:3000/node_modules/.vite/deps/@mui_material.js?v=ca864f9f
+Source Map URL: @mui_material.js.map
+
+Source map error: No sources are declared in this source map.
+Resource URL: http://localhost:3000/node_modules/.vite/deps/@mui_material_styles.js?v=7facbec8
+Source Map URL: @mui_material_styles.js.map
